@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+
+    <title>Science Uncovered</title>
+
+    <script src="libs/jquery/dist/jquery.js"></script>
+
+    <style>
+
+        body{
+            background: #000;
+            text-align: center;
+        }
+
+        #container img{
+            width: 100%;
+            min-height: 900px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+    </style>
+
+    <script>
+
+        $(function() {
+
+            function update_image() {
+
+                console.log('Update image');
+
+                $.getJSON("https://api.flickr.com/services/feeds/groups_pool.gne?id=2671437@N25&lang=en-us&format=json&jsoncallback=?", function (data) {
+
+//                    var x = Math.floor( Math.random() * 7 );
+
+//                    var img = data.items[x];
+
+                    var img = data.items.shift();
+
+                    // Use the big image
+                    img.media.m = img.media.m.replace('_m.jpg', '_b.jpg')
+
+                    $('#container').html($("<img/>").attr("src", img.media.m))
+
+                });
+
+            }
+
+            update_image()
+
+            setInterval(update_image, 10000);
+
+        });
+
+    </script>
+
+
+</head>
+<body>
+
+<script type="text/javascript">
+
+
+
+
+
+</script>
+
+<div id="container"></div>
+
+</body>
+</html>
