@@ -9,45 +9,42 @@
     <script src="libs/jquery/dist/jquery.js"></script>
 
     <style>
-	* {
-    	margin:0;
-	}
+        * {
+            margin: 0;
+        }
 
-        body{
+        body {
             background: #000;
             text-align: center;
-	    margin: 0;
-            padding: 0;
-	overflow: hidden;
+            overflow: hidden;
         }
 
-        #container img{
-		max-width:100%;
-	min-height:100%;
-	max-height:100%;
+        #container img {
+            max-width: 100%;
+            min-height: 100%;
+            max-height: 100%;
         }
 
-	#feedly-mini{
-		display:none;
-	}
+        #feedly-mini {
+            display: none;
+        }
 
     </style>
 
     <script>
 
-        $(function() {
+        $(function () {
 
             function update_image() {
 
                 $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?id=53906044@N04&tags=SU2014&lang=en-us&format=json&jsoncallback=?", function (data) {
 
-                    console.log(data);
-                    var x = Math.floor( Math.random() * 2 );
-			console.log(x);
+//                    console.log(data);
+//                    var x = Math.floor(Math.random() * 3);
+//                    console.log(x);
+//                    var img = data.items[x];
 
-                    var img = data.items[x];
-
-//                    var img = data.items.shift();
+                    var img = data.items.shift();
 
                     // Use the big image
                     img.media.m = img.media.m.replace('_m.jpg', '_b.jpg')
