@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
 
-    <title>Science Uncovered</title>
+    <title>Flickr: Science Uncovered</title>
 
     <script src="libs/jquery/dist/jquery.js"></script>
 
@@ -33,23 +33,19 @@
 
     <script>
 
+
         $(function () {
+
+            // NB: This gets the last image uploaded after a certain date - there is a bug in flickr, not honouring sort order if search params are passed in
+
+            var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=3608750bb8733644f1b6b0ea75602330&user_id=53906044@N04&lang=en-us&per_page=1&extras=date_upload&min_upload_date=1411479000&extras=url_l'
 
             function update_image() {
 
-                $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?id=53906044@N04&tags=SU2014&lang=en-us&format=json&jsoncallback=?", function (data) {
+                $.getJSON(url + "&format=json&jsoncallback=?", function (data) {
 
-//                    console.log(data);
-//                    var x = Math.floor(Math.random() * 3);
-//                    console.log(x);
-//                    var img = data.items[x];
-
-                    var img = data.items.shift();
-
-                    // Use the big image
-                    img.media.m = img.media.m.replace('_m.jpg', '_b.jpg')
-
-                    $('#container').html($("<img/>").attr("src", img.media.m))
+                    var img = data.photos.photo.shift();
+                    $('#container').html($("<img/>").attr("src", img.url_l))
 
                 });
 
