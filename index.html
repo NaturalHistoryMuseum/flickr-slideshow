@@ -42,6 +42,8 @@
 
             function update_image() {
 
+                console.log('Updating image');
+
                 $.getJSON(url + "&format=json&jsoncallback=?", function (data) {
 
                     var img = data.photos.photo.shift();
